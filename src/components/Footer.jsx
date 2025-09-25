@@ -26,15 +26,17 @@ const Footer = () => {
             <p>Products & Services</p>
             <p>Customer Stories</p>
             <p>Download Apps</p>
-        </div>                    </div>
-                    <div>
+        </div>                 
+           </div>
+              <div>
          <h3 className=' text-white font-semibold'>Information</h3>
     <div className=' text-white '>
             <p>Privacy Policy</p>
             <p>Terms & Conditions</p>
             <p>Join Us</p>
-        </div>                    </div>
-                    <div>
+        </div>          
+           </div>
+          <div>
     <h3 className=' text-white font-semibold'>Social Links</h3>
              <div className=' text-white '>
            <p>@CS — Ticket System</p>
