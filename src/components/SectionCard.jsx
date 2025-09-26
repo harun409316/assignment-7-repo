@@ -1,23 +1,62 @@
-import React, { use } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../Container';
 import elip from "../assets/Ellipse 22.png";
 import calander from "../assets/ri_calendar-line.png";
 
 const SectionCard = ({ cartPromise }) => {
-  const cartData = use(cartPromise);
-  console.log(cartData);
+  const [cartData, setCartData] = useState([]);
+  const [selected, setSelected] = useState([]);
+  const [inProgressCount, setProgressCount] = useState(0);
+  const [resolvedCount, setResolvedCount] = useState(0);
+
+  useEffect(() => {
+    cartPromise.then((data) => setCartData(data));
+  }, [cartPromise]);
+
+  const handleSelect = (item) => {
+    setSelected((prev) => [...prev, item]);
+    setProgressCount((prev) => prev + 1);
+   
+  };
+
+  const handleComplete = (id) => {
+    setResolvedCount((prev) => prev +1);
+    setResolvedCount((prev) => prev );
+    setSelected((prev) => prev.filter((item) => item.id !== id));
+     setProgressCount((prev) => prev -1);
+  };
 
   return (
     <Container> 
+      
+            <div className="grid grid-cols-2 max-w-[1200px] mx-auto gap-5 my-[30px]">
+              
+            <div className="bg-gradient-to-r from-[#632ee3] to-[#9f62f2] h-[200px] rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
+                <h2>In Progress</h2>
+                <p>{inProgressCount}</p>
+              </div>
+              <div className="bg-gradient-to-r from-[#54cf68] to-[#00827a] h-[200px] rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
+                <h2>Resolved</h2>
+                <p>{resolvedCount}</p>
+              </div>
+                
+             
+            </div>
+
       <div className="bg-[#f5f5f5]">
         <div className="max-w-[1200px] mx-auto my-10 grid grid-cols-12 gap-6">
-          
+
           {/* Left main part */}
-          <div className="col-span-9 ">
-            <div  className="grid grid-cols-2 gap-3 my-4">
-            {cartData.map(cart => (
-              
-                <div key={cart.id} className="bg-white shadow-sm p-4 rounded-xl w-full">
+          <div className="col-span-9">
+           
+            {/* 🔹 Card List */}
+            <div className="grid grid-cols-2 gap-3 my-4">
+              {cartData.map(cart => (            
+                <div  
+                  key={cart.id} 
+                  className="bg-white shadow-sm p-4 rounded-xl w-full cursor-pointer hover:shadow-md transition" 
+                  onClick={() => handleSelect(cart)}
+                > 
                   <div className="flex justify-between items-center">
                     <h3 className="font-semibold text-xl">{cart.title}</h3>
                     <button className="bg-[#b9f8cf] px-3 py-1 rounded-full flex gap-1 items-center text-sm">
@@ -41,16 +80,30 @@ const SectionCard = ({ cartPromise }) => {
                       </div>
                     </div>
                   </div>
-                </div>
-             
-            ))}
-             </div>
+                </div>            
+              ))}
+            </div>
           </div>
 
           {/* Right aside */}
-          <div className="col-span-3 border-2 border-red-500">
-            {/* Sidebar content goes here */}
+          <div className="col-span-3">
+            <h3 className='font-semibold text-2xl text-[#34485A]'>Task Status</h3>
+            {selected.map((item) => (
+              <div key={item.id} className='bg-white m-2 rounded-lg'>
+                <div className='p-3'>
+                  <h3 className='text-[#34485A]'>{item.title}</h3>
+                  <button onClick={() => handleComplete(item.id)} className='bg-[#02A53B] w-full rounded-lg mt-3 py-2 text-white'>Complete</button>
+                </div>
+              </div>
+            ))}
+            <div  className='bg-white m-2 rounded-lg'>
+                <div className='p-3'>
+                  <h3 className='text-[#34485A]'>Resolved check</h3>
+                  <button  className='text-[#02A53B] w-full rounded-lg mt-3 py-2'>Complete</button>
+              </div>
+              </div>
           </div>
+
         </div> 
       </div>
     </Container>

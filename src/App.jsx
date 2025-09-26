@@ -4,7 +4,7 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import "./assets/vector1.png"
 
-import BannerCard from './components/BannerCard'
+
 import SectionCard from './components/SectionCard'
 import { Suspense } from 'react'
 
@@ -21,10 +21,11 @@ const cartPromise = fetchSection()
 
     <Navbar></Navbar>
   
-<BannerCard></BannerCard>
+
+
 
 <Suspense>
-  <SectionCard cartPromise={cartPromise}></SectionCard>
+  <SectionCard  cartPromise={cartPromise}></SectionCard>
 </Suspense>
 
     <Footer></Footer>
