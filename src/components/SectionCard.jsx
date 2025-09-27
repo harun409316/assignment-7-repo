@@ -3,6 +3,7 @@ import Container from '../Container';
 import elip from "../assets/Ellipse 22.png";
 import calander from "../assets/ri_calendar-line.png";
 import img1 from '../assets/vector1.png'
+import check from '../assets/check-solid-full.svg';
 
 import { toast } from 'react-toastify';
 
@@ -11,6 +12,7 @@ const SectionCard = ({ cartPromise }) => {
   const [selected, setSelected] = useState([]);
   const [inProgressCount, setProgressCount] = useState(0);
   const [resolvedCount, setResolvedCount] = useState(0);
+  const [resolvedTasks, setResolveTasks] = useState([]);
 
   useEffect(() => {
     cartPromise.then((data) => setCartData(data));
@@ -23,28 +25,28 @@ const SectionCard = ({ cartPromise }) => {
    toast("in Progress!");
   };
 
-  const handleComplete = (id) => {
-   
-      
-      setResolvedCount((prev) => prev +1);
-       setResolvedCount((prev) => prev );
-    setSelected((prev) => prev.filter((item) => item.id !== id));
+  const handleComplete = (id) => {  
+    const completedTask = selected.find((item) => item.id === id);
 
-    
-   
-      
+    if(completedTask){
+        setResolvedCount((prev) => prev +1);
+       setResolveTasks((prev) =>[...prev, completedTask]);
+    setSelected((prev) => prev.filter((item) => item.id !== id));  
       setProgressCount((prev) => prev -1);
     
-
       toast("Completed!!");
-
-     
+    }
   };
+
+  const handleRemoveResolved = (id) => {
+  setResolveTasks((prev) => prev.filter((task) => task.id !== id));
+  toast("Removed from Resolved!");
+}
 
   return (
     <Container> 
       
-            <div className="grid grid-cols-2 max-w-[1200px] mx-auto gap-5 my-[30px]">
+            <div className="grid grid-cols-2 max-w-[1200px] mx-auto gap-5 my-[30px]  ">
             <div  className="bg-gradient-to-r from-[#632ee3] to-[#9f62f2] h-[200px] md:h-[240px]  rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
                <div className='flex relative  h-full w-full'>
           <img className=' absolute left-0 bottom-0 ' src={img1} alt="" />
@@ -76,10 +78,10 @@ const SectionCard = ({ cartPromise }) => {
         <div className="max-w-[1200px] mx-auto my-10 grid grid-cols-12 gap-6">
 
           {/* Left main part */}
-          <div className="col-span-9">
+          <div className="md:col-span-9 col-span-12">
            
             {/*  Card List */}
-            <div className="grid grid-cols-2 gap-3 my-4">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-3 my-4">
               {cartData.map(cart => (            
                 <div  
                   key={cart.id} 
@@ -115,22 +117,36 @@ const SectionCard = ({ cartPromise }) => {
           </div>
 
           {/* Right aside */}
-          <div className="col-span-3">
+          <div className="md:col-span-3 col-span-12">
             <h3 className='font-semibold text-2xl text-[#34485A]'>Task Status</h3>
-            {selected.map((item) => (
+            {selected.length> 0? selected.map((item) => (
               <div key={item.id} className='bg-white m-2 rounded-lg'>
                 <div className='p-3'>
-                  <h3 className='text-[#34485A]'>{item.title}</h3>
+                  <h3 className='text-[#34485A]'>{item.title} </h3>
                   <button onClick={() => handleComplete(item.id)} className='bg-[#02A53B] w-full rounded-lg mt-3 py-2 text-white'>Complete</button>
                   
                 </div>
               </div>
-            ))}
-            <div className='bg-white m-2 rounded-lg'>
-                <div className='p-3'>
-                  <h3 className='text-[#34485A]'>Resolved check</h3>
-                  <button onClick={handleComplete} className='text-[#02A53B] w-full rounded-lg mt-3 py-2'>{resolvedCount?" Resolveded":"Complete"}</button>
-              </div>
+            )):<p className='bg-white p-1'>Click the card</p>}
+            <div>
+            <h3 className='text-[#34485A] text-2xl font-semibold'>Resolved check</h3>
+           {
+            resolvedTasks.length>0?
+            resolvedTasks.map((task) => (
+             <div className=' p-3 rounded-lg bg-[#E0E7FF] mt-2' key={task.id}>
+              <span>{task.title}</span>
+              <div className='flex justify-between'>
+             <p className='bg-white flex p-1'><img className=' text-center h-[20px] w-[20px]' src={check} alt="" /> completed</p>
+              <button 
+        onClick={() => handleRemoveResolved(task.id)} 
+        className='bg-red-500 text-white px-3 py-1 rounded-lg text-sm'
+      >Remove</button>
+      </div>
+             </div>
+        
+            )):<p>No resolve task yet</p>
+           }
+            
               </div>
           </div>
 

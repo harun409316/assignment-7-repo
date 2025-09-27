@@ -8,11 +8,11 @@ import email from '../assets/email.svg'
 
 const Footer = () => {
     return (
-        <div className='bg-black h-[432px]'> 
+        <div className='bg-black h-auto '> 
             <Container>
-        <div className='max-w-[1200px] mx-auto grid md:grid-cols-5 grid-cols-3  gap-8'>
+        <div className=' pt-12 justify-center  text-center max-w-[1200px] mx-auto grid md:grid-cols-5 grid-cols-1  gap-8'>
       
-     <div>
+     <div >
     <h3 className=' text-white font-semibold'>CS — Ticket System</h3>
       <p className='text-white'>Lorem Ipsum is simply text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 </div>
@@ -41,27 +41,30 @@ const Footer = () => {
         </div>          
            </div>
           <div>
-    <h3 className=' text-white font-semibold'>Social Links</h3>
+    <h3 className=' text-white font-semibold '>Social Links</h3>
              <div className=' text-white '>
-                <div className='flex gap-1 '>
+                <div className='flex gap-1 justify-center  '>
                     <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={tweet} alt="" />
                     <p>@CS — Ticket System</p>
                 </div>
-                <div className='flex gap-1 '>
+                <div className='flex gap-1 justify-center '>
                     <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={inst} alt="" />
                     <p>@CS — Ticket System</p>
                 </div>
-                <div className='flex gap-1 '>
+                <div className='flex gap-1 justify-center  '>
                     <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={face} alt="" />
                     <p>@CS — Ticket System</p>
                 </div>
-                <div className='flex gap-1 '>
+                <div className='flex gap-1 justify-center '>
                     <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={email} alt="" />
                     <p>@CS — Ticket System</p>
                 </div>
             <p>support@cst.com</p>
         </div>
                     </div>
+                </div>
+                <div>
+                    <p className='mt-10 pb-10 text-white text-center'>© 2025 CS — Ticket System. All rights reserved.</p>
                 </div>
             </Container>
         </div>
