@@ -1,5 +1,6 @@
 
 import './App.css'
+import { ToastContainer } from 'react-toastify';
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import "./assets/vector1.png"
@@ -29,6 +30,7 @@ const cartPromise = fetchSection()
 </Suspense>
 
     <Footer></Footer>
+    <ToastContainer />
     </>
   )
 }

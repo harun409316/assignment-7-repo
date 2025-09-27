@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from '../Container';
 import elip from "../assets/Ellipse 22.png";
 import calander from "../assets/ri_calendar-line.png";
+import { toast } from 'react-toastify';
 
 const SectionCard = ({ cartPromise }) => {
   const [cartData, setCartData] = useState([]);
@@ -14,16 +15,28 @@ const SectionCard = ({ cartPromise }) => {
   }, [cartPromise]);
 
   const handleSelect = (item) => {
-    setSelected((prev) => [...prev, item]);
+    setSelected((prev) => [...prev, { ...item, status: "inProgress" }]);
     setProgressCount((prev) => prev + 1);
-   
+    setCartData((prev) => prev.filter((cart) => cart.id !== item.id));
+   toast("in Progress!");
   };
 
   const handleComplete = (id) => {
-    setResolvedCount((prev) => prev +1);
-    setResolvedCount((prev) => prev );
+   
+      
+      setResolvedCount((prev) => prev +1);
+       setResolvedCount((prev) => prev );
     setSelected((prev) => prev.filter((item) => item.id !== id));
-     setProgressCount((prev) => prev -1);
+
+    
+   
+      
+      setProgressCount((prev) => prev -1);
+    
+
+      toast("Completed!!");
+
+     
   };
 
   return (
@@ -49,7 +62,7 @@ const SectionCard = ({ cartPromise }) => {
           {/* Left main part */}
           <div className="col-span-9">
            
-            {/* 🔹 Card List */}
+            {/*  Card List */}
             <div className="grid grid-cols-2 gap-3 my-4">
               {cartData.map(cart => (            
                 <div  
@@ -96,10 +109,10 @@ const SectionCard = ({ cartPromise }) => {
                 </div>
               </div>
             ))}
-            <div  className='bg-white m-2 rounded-lg'>
+            <div className='bg-white m-2 rounded-lg'>
                 <div className='p-3'>
                   <h3 className='text-[#34485A]'>Resolved check</h3>
-                  <button  className='text-[#02A53B] w-full rounded-lg mt-3 py-2'>Complete</button>
+                  <button onClick={handleComplete} className='text-[#02A53B] w-full rounded-lg mt-3 py-2'>{resolvedCount?" Resolveded":"Complete"}</button>
               </div>
               </div>
           </div>
