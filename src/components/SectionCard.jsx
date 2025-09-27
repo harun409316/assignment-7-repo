@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Container from '../Container';
 import elip from "../assets/Ellipse 22.png";
 import calander from "../assets/ri_calendar-line.png";
+import img1 from '../assets/vector1.png'
+
 import { toast } from 'react-toastify';
 
 const SectionCard = ({ cartPromise }) => {
@@ -43,14 +45,28 @@ const SectionCard = ({ cartPromise }) => {
     <Container> 
       
             <div className="grid grid-cols-2 max-w-[1200px] mx-auto gap-5 my-[30px]">
-              
-            <div className="bg-gradient-to-r from-[#632ee3] to-[#9f62f2] h-[200px] rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
+            <div  className="bg-gradient-to-r from-[#632ee3] to-[#9f62f2] h-[200px] md:h-[240px]  rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
+               <div className='flex relative  h-full w-full'>
+          <img className=' absolute left-0 bottom-0 ' src={img1} alt="" />
+          <img className=' absolute right-0 bottom-0 scale-x-[-1] ' src={img1} alt="" />
+               <div className='text-center w-full flex flex-col justify-center items-center'>
                 <h2>In Progress</h2>
                 <p>{inProgressCount}</p>
+               </div>
+               
+               </div>
+              
               </div>
-              <div className="bg-gradient-to-r from-[#54cf68] to-[#00827a] h-[200px] rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
+              <div className="bg-gradient-to-r from-[#54cf68] to-[#00827a] h-[200px] md:h-[240px] rounded-lg flex flex-col items-center justify-center font-semibold text-[22px] text-white">
+               <div className='flex relative  h-full w-full'>
+          <img className=' absolute left-0 bottom-0 ' src={img1} alt="" />
+          <img className=' absolute right-0 bottom-0 scale-x-[-1] ' src={img1} alt="" />
+               <div className='text-center w-full flex flex-col  justify-center items-center'>
                 <h2>Resolved</h2>
                 <p>{resolvedCount}</p>
+               </div>
+               
+               </div>
               </div>
                 
              
@@ -106,6 +122,7 @@ const SectionCard = ({ cartPromise }) => {
                 <div className='p-3'>
                   <h3 className='text-[#34485A]'>{item.title}</h3>
                   <button onClick={() => handleComplete(item.id)} className='bg-[#02A53B] w-full rounded-lg mt-3 py-2 text-white'>Complete</button>
+                  
                 </div>
               </div>
             ))}

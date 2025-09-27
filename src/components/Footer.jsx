@@ -1,16 +1,20 @@
 import React from 'react';
 import Container from '../Container';
+import tweet from '../assets/x-tweet.svg'
+import inst from '../assets/inst.svg'
+import face from '../assets/face.svg'
+import email from '../assets/email.svg'
 
 
 const Footer = () => {
     return (
         <div className='bg-black h-[432px]'> 
             <Container>
-        <div className='max-w-[1200px] mx-auto grid grid-cols-5 gap-10'>
+        <div className='max-w-[1200px] mx-auto grid md:grid-cols-5 grid-cols-3  gap-8'>
       
      <div>
     <h3 className=' text-white font-semibold'>CS — Ticket System</h3>
-      <p className='text-white'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      <p className='text-white'>Lorem Ipsum is simply text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 </div>
  <div>
         <h3 className=' text-white font-semibold'>Company</h3>
@@ -39,9 +43,22 @@ const Footer = () => {
           <div>
     <h3 className=' text-white font-semibold'>Social Links</h3>
              <div className=' text-white '>
-           <p>@CS — Ticket System</p>
-            <p>@CS — Ticket System</p>
-            <p>@CS — Ticket System</p>
+                <div className='flex gap-1 '>
+                    <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={tweet} alt="" />
+                    <p>@CS — Ticket System</p>
+                </div>
+                <div className='flex gap-1 '>
+                    <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={inst} alt="" />
+                    <p>@CS — Ticket System</p>
+                </div>
+                <div className='flex gap-1 '>
+                    <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={face} alt="" />
+                    <p>@CS — Ticket System</p>
+                </div>
+                <div className='flex gap-1 '>
+                    <img className=' mt-1 bg-white rounded-full  w-[20px] h-[20px] ' src={email} alt="" />
+                    <p>@CS — Ticket System</p>
+                </div>
             <p>support@cst.com</p>
         </div>
                     </div>
